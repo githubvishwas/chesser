@@ -1,27 +1,65 @@
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
+  if(recordstart === 0) {
+	return true
+  }
+  console.log("game.game_over: " + game.game_over())
+  console.log("game.turn: " + game.turn())
+  console.log("piece: " + piece)
   if (game.game_over() === true ||
       (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
     return false;
   }
 };
-
-var onDrop = function(source, target) {
-
+var playNextMove = function() {
+	game.move(solArray[numMovesPlayed]);
+   board.position(game.fen());
 	
+	numMovesPlayed += 1;
+	if (numMovesPlayed === solArray.length) {
+	  alert("Solved!");
+	  return;
+	}	
+}
+var onDrop = function(source, target) {
+	console.log("source: " + source)
+	console.log("target: " + target)
+	
+  if(recordstart === 0 && solveMode === 0) {
+	return true
+  }
+  console.log("game.fen(): " + game.fen())
   // see if the move is legal
   var move = game.move({
     from: source,
     to: target,
     promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
-
+  
   // illegal move
   if (move === null) {
+		console.log("illegal move!")
 		return 'snapback';
 	}
+	if(solveMode === 1) {
+		var lsol = game.history();
+		console.log("played1: " + lsol);
+		
+		var lsolarray = lsol.toString().split(',');
+		
+		console.log("played: " + lsol[numMovesPlayed]);
+		console.log("expected: " + solArray[numMovesPlayed]);
+		console.log("move num: " + numMovesPlayed);
+		
+		if(lsol[numMovesPlayed] != solArray[numMovesPlayed]) {
+		
+			game.undo();
+			return 'snapback';
+		}
+	}
+	
 	if (move.promotion){
 			 mente();
 		if (game.turn() === 'w'){
@@ -31,12 +69,25 @@ var onDrop = function(source, target) {
 	     else{ pwh();	      
 	 }	 
 	 }
+	 
+  numMovesPlayed++;
+	if (numMovesPlayed === solArray.length) {
+	  alert("Solved!");
+	  return;
+	}	
+  if(solveMode === 1) {
+	  setTimeout(playNextMove,500)
+	}
   updateStatus();
 };
 
 // update the board position after the piece snap 
 // for castling, en passant, pawn promotion
 var onSnapEnd = function() {
+  if(recordstart === 0) {
+	return true
+  }	
+  console.log("game.fen(): " + game.fen())
   board.position(game.fen());
 };
 
@@ -76,11 +127,20 @@ var updateStatus = function() {
   statusEl.html(status);
 
 };
+var Hint = function() {
+   game.move(solArray[numMovesPlayed]);
+   board.position(game.fen());
+   setTimeout(undo, 1000);
+   
+}
 var reset = function() {
 	window.open(window.location.href,"_self")
 }
 var SharePuzzle = function() {
-	var gameUrl = "https://chesser.azurewebsites.net/?fen="+orgStartPos;
+	console.log("History: " + game.history())
+	startPos = startPos.replace(/ /g,"_");
+	var gameUrl = "https://chesser.azurewebsites.net/puzzlecreator.html?fen="+startPos+"&sol="+game.history();
+	//var gameUrl = "file:///D:/chess/chesser/chesser/puzzlecreator.html?fen="+startPos+"&sol="+game.history();
 	//var gameUrl = "file:///D:/chess/githubvishwas.github.io/justplaychess.html?fen="+orgStartPos+"&source="+glb_source+"&target="+glb_target;
 	
 	//var sendlink  = "https://wa.me/?text="+encodeURIComponent(gameUrl)
@@ -100,7 +160,18 @@ var sendmove = function() {
 	window.open(sendlink)
 	//window.open(gameUrl)
 }
-
+function record() {
+	//console.log("Board pos: " + board.fen());
+	recordstart = 1
+	if(startPos === "") {
+		startPos = board.fen() + " " + "w" + " KQkq - 0 1";
+	} 
+	console.log("Board pos: " + startPos);
+	game = new Chess();
+	game.load(startPos);
+	board.position(game.fen());
+	console.log("game pos: " + game.fen());
+}  
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -236,6 +307,10 @@ function playSolution() {
     istep = solArray.length;
 }
 function undo() {
+	if(recordstart === 0 && solveMode === 0) {
+		alert("Undo applicable only after record starts")
+		return
+	}
 	game.undo();
 	board.position(game.fen());
 }
@@ -274,106 +349,54 @@ $('#nextBtn5').on('click', function() {
     board.position(game.fen());
     istep = solArray.length;
   });
+
 function main() {
-	startPos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR_w_KQkq_-_0_1'
-	//var startPos = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1'
-	//file:///D:/chess/githubvishwas.github.io/justplaychess.html?fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR_w_KQkq_-_0_1&source=d2&target=d4
+
 	params = getUrlVars();
 	if("fen" in params) {
 		startPos = params["fen"];
-		fenArray = startPos.split('_');
-		if(fenArray.length === 2) {
-			startPos = startPos + "_KQkq_-_0_1"
-		}
-	}
-	
-	if("pgn" in params) {
-		solpgn = params["pgn"];
-		solArray = solpgn.split('_');
-		var x = document.getElementById("userbtns");
+		startPos = startPos.replace(/_/g, " ");
+		var x = document.getElementById("userbtns1");
 		x.style.display = "none"
+		solveMode = 1;
 	} else {
-		var x = document.getElementById("solbtn");
+		var x = document.getElementById("userbtns2");
 		x.style.display = "none"
 	}
-	glb_source = "";
-	if("source" in params) {
-			glb_source = params["source"];
-		}
-		
-	glb_target = "";
-	if("target" in params) {
-			glb_target = params["target"];
-		}	
-	orgStartPos = startPos
-	startPos = orgStartPos.replace(/_/g, " ");
-
-	lastplay = startPos.split(" ")[1];
-	toplay = ""
-	g_orientation = "white"
-	if(lastplay === "b") {
-			g_orientation = "black"
-	} 
-	console.log("Start chess!");
-	console.log("startPos: " + startPos);
-	console.log("lastplay: " + lastplay);
-	console.log("toplay: " + toplay);
-	console.log("orientation: " + g_orientation);
-	console.log("glb_source: " + glb_source);
-	console.log("glb_target: " + glb_target);
 	
-	var cfg = {
-	  draggable: true,
-	  onDragStart: onDragStart,
-	  onDrop: onDrop,
-	  onSnapEnd: onSnapEnd,
-	  moveSpeed: 'slow', 
-	  position: startPos,
-	  orientation: g_orientation
-	};
-	game.load(startPos)
-	//game.load_pgn(solpgn);
-	
-	var solpgn1 = solpgn.replace(/_/g, " ");
-	$('#pgn5').html("Sol: " + solpgn1);
-	board = ChessBoard('board', cfg);
-	board.position(game.fen());
-	
-/*
-	if(glb_target != "") {
-			game.load(startPos)
-			glb_source = params["source"];
-			var move = game.move({
-				from: glb_source,
-				to: glb_target,
-				promotion: 'q' // NOTE: always promote to a queen for example simplicity
-			  });
-			//game.move(move);
-			board.position(game.fen());
-			orgStartPos = game.fen().replace(/ /g,"_");
+	if("sol" in params) {
+		var soln = params["sol"];
+		solArray = soln.split(',');
 		
 	}
-*/
-
-
-	  
-
+	
+	board = ChessBoard('board', {
+	draggable: true,
+	dropOffBoard: 'trash',
+	sparePieces: true,
+	onDragStart: onDragStart,
+	onDrop: onDrop,
+	onSnapEnd: onSnapEnd,
+	moveSpeed: 'slow', 
+});
+	if(solveMode === 1) {
+		game = new Chess();
+		game.load(startPos);
+		board.position(game.fen());
+	}
 	updateStatus();
 }
 var board
-var game = new Chess()
+var game
+var numMovesPlayed = 0
+var solArray = ""
 var statusEl = $('#status');
 var startPos = ""
-var solpgn = ""
-var solArray = ""
-var fenArray = ""
-var glb_source = ""
-var glb_target = ""
-var orgStartPos = ""
-var lastplay = ""
-var toplay = ""
-var g_orientation = ""
-var istep = 0;
-
+var recordstart = 0;
+var solveMode = 0;
+var meta = document.createElement('meta');
+meta.name = "twitter:domain";
+meta.content = window.location.href;
+document.getElementsByTagName('head')[0].appendChild(meta);
 
 main()

@@ -6,6 +6,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<meta name="twitter:card" content="photo">
+	<meta name="twitter:site" content="@HitStitch">
+	<meta name="twitter:creator" content="@HitStitch">
+
+	<!--meta name="twitter:domain" content="https://chesser.azurewebsites.net" /-->
+	<meta name="twitter:url" content="https://chesser.azurewebsites.net/preview.jpg">
+	<meta name="twitter:title" content="Solve puzzles & view solutions!">
+	<meta name="twitter:description" content="Solve puzzles & view solutions!">
+	<meta name="twitter:image" content="https://chesser.azurewebsites.net/preview.jpg">
+	<meta name="twitter:image:width" content="500">
+	<meta name="twitter:image:height" content="500">
+
 	<link rel="stylesheet" href="css/chessboard-0.3.0.min.css">
 	<link rel="stylesheet" href="css/main.css" />
 	<link rel="icon" href="chesser_16.png">
@@ -25,31 +38,43 @@
 
 </head>
 
-
+<script type="text/javascript">
+	var meta = document.createElement('meta');
+	meta.name = "twitter:domain";
+	meta.content = window.location.href;
+	document.getElementsByTagName('head')[0].appendChild(meta);
+</script>
 
 <body>
     <div id="board" style="width: 300px"></div>
 
-	<p>Powered by chess.js and chessboard.js <span id="status" style="width: 250px"></span></p>
+	<p>Powered by chess.js & chessboard.js<span id="status" style="width: 250px"></span></p>
 	
-	<!--div style="margin: 5px; width: 400px;display: inline-block;">
-	<p>Solution <span id="status" style="width: 50px"></span></p>
-	<input type="button" id="startPositionBtn5" value="|<" />
-	<input type="button" id="prevBtn5" value="<" />
-	<input type="button" id="nextBtn5" value=">" />
-	<input type="button" id="endPositionBtn5" value=">|" />
-	<p><span id="pgn5"></span></p>
-	</div-->
-	<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "reset()">Reset</button>
+	<div id="toplay">
+		  <input type="radio" name="To play" value="w" checked> white to play<br>
+		  <input type="radio" name="To play" value="b"> black to play<br>
+	</div>
+	<div id="userbtns1">
+		<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "record()">Record</button>
 	
-	<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "undo()">Undo</button>
-	<br/>
-	<button type = "button"  style="width: 265px; margin:5px; display: inline-block;" class="btn btn-lg btn-success" onclick = "SharePuzzle()">Share Puzzle</button>
+		<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "undo()">Undo</button>
+		<br/>
+	</div>
+	
+	<div id="userbtns2">
+		<button type = "button"  style="width: 265px; margin:5px; display: inline-block;" class="btn btn-lg btn-success" onclick = "Hint()">Hint</button>
+		<br/>
+	</div>
+	
+	<div id="userbtns2">
+		<button type = "button"  style="width: 265px; margin:5px; display: inline-block;" class="btn btn-lg btn-success" onclick = "SharePuzzle()">Share Puzzle</button>
+	</div>
 
-
+	
+	
     <script src="js/chessboard-0.3.0.min.js"></script>
 	<script src="js/chess.js"></script>
-	<script src="puzzle.js"></script>
+	<script src="puzzlecreator.js"></script>
 	
 	<div id="coronar" hidden="coronar" >
 
