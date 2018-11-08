@@ -292,6 +292,9 @@ function main() {
 		solArray = solpgn.split('_');
 		var x = document.getElementById("userbtns");
 		x.style.display = "none"
+	} else {
+		var x = document.getElementById("solbtn");
+		x.style.display = "none"
 	}
 	glb_source = "";
 	if("source" in params) {
