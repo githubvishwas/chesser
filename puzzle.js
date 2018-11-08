@@ -226,14 +226,25 @@ function kw3(){   //solo muestra la popu
 	game.undo();
 	kw3();		
 }
+function playSolution() {
+	for(var i = istep; i < solArray.length; i++) {
+        game.move(solArray[i]);
+		board.position(game.fen());
+    }
+    
+    
+    istep = solArray.length;
+}
 function undo() {
 	game.undo();
 	board.position(game.fen());
 }
 // 3. If Next button clicked, move forward one
 $('#nextBtn5').on('click', function() {
+	
     game.move(solArray[istep]);
     board.position(game.fen());
+	
     istep += 1;
     if (istep > solArray.length) {
       istep = solArray.length;
@@ -279,6 +290,8 @@ function main() {
 	if("pgn" in params) {
 		solpgn = params["pgn"];
 		solArray = solpgn.split('_');
+		var x = document.getElementById("userbtns");
+		x.style.display = "none"
 	}
 	glb_source = "";
 	if("source" in params) {
@@ -317,10 +330,11 @@ function main() {
 	game.load(startPos)
 	//game.load_pgn(solpgn);
 	
-	
-	$('#pgn5').html(solpgn);
+	var solpgn1 = solpgn.replace(/_/g, " ");
+	$('#pgn5').html("Sol: " + solpgn1);
 	board = ChessBoard('board', cfg);
 	board.position(game.fen());
+	
 /*
 	if(glb_target != "") {
 			game.load(startPos)
