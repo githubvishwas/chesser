@@ -85,7 +85,8 @@ var SharePuzzle = function() {
 	
 	//var sendlink  = "https://wa.me/?text="+encodeURIComponent(gameUrl)
 	
-	prompt("Share the link below and challenge your friend!", encodeURIComponent(gameUrl))
+	//prompt("Share the link below and challenge your friend!", encodeURIComponent(gameUrl))
+	prompt("Share the link below and challenge your friend!", gameUrl)
 	//alert(sendlink)
 	//window.open(sendlink)
 	//window.open(gameUrl)
