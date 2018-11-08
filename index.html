@@ -10,6 +10,7 @@
 	<meta name="twitter:card" content="photo">
 	<meta name="twitter:site" content="@HitStitch">
 	<meta name="twitter:creator" content="@HitStitch">
+
 	<!--meta name="twitter:domain" content="https://chesser.azurewebsites.net" /-->
 	<meta name="twitter:url" content="https://chesser.azurewebsites.net/preview.png">
 	<meta name="twitter:title" content="Solve puzzles!">
@@ -37,7 +38,12 @@
 
 </head>
 
-
+<script type="text/javascript">
+	var meta = document.createElement('meta');
+	meta.name = "twitter:domain";
+	meta.content = window.location.href;
+	document.getElementsByTagName('head')[0].appendChild(meta);
+</script>
 
 <body>
     <div id="board" style="width: 300px"></div>
