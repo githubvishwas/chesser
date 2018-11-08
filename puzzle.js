@@ -373,4 +373,10 @@ var lastplay = ""
 var toplay = ""
 var g_orientation = ""
 var istep = 0;
+
+var meta = document.createElement('meta');
+meta.name = "twitter:domain";
+meta.content = window.location.href;
+document.getElementsByTagName('head')[0].appendChild(meta);
+
 main()
