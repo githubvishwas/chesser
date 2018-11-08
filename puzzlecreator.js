@@ -358,6 +358,8 @@ function main() {
 		startPos = startPos.replace(/_/g, " ");
 		var x = document.getElementById("userbtns1");
 		x.style.display = "none"
+		x = document.getElementById("toplay");
+		x.style.display = "none"
 		solveMode = 1;
 	} else {
 		var x = document.getElementById("userbtns2");
@@ -369,11 +371,14 @@ function main() {
 		solArray = soln.split(',');
 		
 	}
-	
+	var sparepc = true;
+	if(solveMode === 1) {
+		sparepc = false;
+	}
 	board = ChessBoard('board', {
 	draggable: true,
 	dropOffBoard: 'trash',
-	sparePieces: true,
+	sparePieces: sparepc,
 	onDragStart: onDragStart,
 	onDrop: onDrop,
 	onSnapEnd: onSnapEnd,
