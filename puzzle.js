@@ -270,6 +270,10 @@ function main() {
 	params = getUrlVars();
 	if("fen" in params) {
 		startPos = params["fen"];
+		fenArray = startPos.split('_');
+		if(fenArray.length === 2) {
+			startPos = startPos + "_KQkq_-_0_1"
+		}
 	}
 	
 	if("pgn" in params) {
@@ -344,6 +348,7 @@ var statusEl = $('#status');
 var startPos = ""
 var solpgn = ""
 var solArray = ""
+var fenArray = ""
 var glb_source = ""
 var glb_target = ""
 var orgStartPos = ""
