@@ -377,13 +377,6 @@ function main() {
 		x = document.getElementById("solbtn");
 		x.style.display = "none"
 		solveMode = 1;
-	} else {
-		var x = document.getElementById("userbtns1");
-		x.style.display = "none"
-		x = document.getElementById("userbtns2");
-		x.style.display = "none"
-		x = document.getElementById("userbtns3");
-		x.style.display = "none"
 	}
 	
 	if("sol" in params) {
