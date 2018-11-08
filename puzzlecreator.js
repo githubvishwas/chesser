@@ -353,8 +353,13 @@ $('#nextBtn5').on('click', function() {
 function main() {
 
 	params = getUrlVars();
+	var orn = 'white'
 	if("fen" in params) {
 		startPos = params["fen"];
+		var posarray = startPos.split('_');
+		if(posarray[1] === 'b') {
+			orn = 'black'
+		}
 		startPos = startPos.replace(/_/g, " ");
 		var x = document.getElementById("userbtns1");
 		x.style.display = "none"
@@ -382,6 +387,7 @@ function main() {
 	onDragStart: onDragStart,
 	onDrop: onDrop,
 	onSnapEnd: onSnapEnd,
+	orientation: orn,
 	moveSpeed: 'slow', 
 });
 	if(solveMode === 1) {
