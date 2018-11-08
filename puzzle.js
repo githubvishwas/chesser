@@ -80,7 +80,7 @@ var reset = function() {
 	window.open(window.location.href,"_self")
 }
 var SharePuzzle = function() {
-	var gameUrl = "http://githubvishwas.github.io/justplaychess.html?fen="+orgStartPos;
+	var gameUrl = "https://chesser.azurewebsites.net?fen="+orgStartPos;
 	//var gameUrl = "file:///D:/chess/githubvishwas.github.io/justplaychess.html?fen="+orgStartPos+"&source="+glb_source+"&target="+glb_target;
 	
 	//var sendlink  = "https://wa.me/?text="+encodeURIComponent(gameUrl)
