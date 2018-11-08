@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/chessboard-0.3.0.min.css">
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="icon" href="chesser_16.png">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<title>Chesser puzzle</title>
+	<meta name="description" content="Solve some chess puzzles!">
+	<meta property="og:title" content="Solve some chess puzzles!" />
+	<meta property="og:description" content="Solve some chess puzzles!">
+	<meta property="og:image" content="chesser_500.png">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+
+
+
+<body>
+    <div id="board" style="width: 350px"></div>
+
+	<p>Powered by chess.js and chessboard.js <span id="status" style="width: 250px"></span></p>
+	
+	<!--div style="margin: 5px; width: 400px;display: inline-block;">
+	<p>Solution <span id="status" style="width: 50px"></span></p>
+	<input type="button" id="startPositionBtn5" value="|<" />
+	<input type="button" id="prevBtn5" value="<" />
+	<input type="button" id="nextBtn5" value=">" />
+	<input type="button" id="endPositionBtn5" value=">|" />
+	<p><span id="pgn5"></span></p>
+	</div-->
+	<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "reset()">Reset</button>
+	
+	<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "undo()">Undo</button>
+	<br/>
+	<button type = "button"  style="width: 265px; margin:5px; display: inline-block;" class="btn btn-lg btn-success" onclick = "SharePuzzle()">Share Puzzle</button>
+
+
+    <script src="js/chessboard-0.3.0.min.js"></script>
+	<script src="js/chess.js"></script>
+	<script src="puzzle.js"></script>
+	
+	<div id="coronar" hidden="coronar" >
+
+  <div class="form-group">
+       <label for="color" class="control-label col-xs-4 col-sm-6 col-md-4">Select</label>
+             <div class="col-xs-4 col-sm-6 col-md-4" >
+               <select   onChange="promo()"  class="image-picker show-labels show-html"  id="promote">
+                 <option value=q selected >Queen</option>
+                 <option value=r>Rook</option>
+                 <option value=b>Bishop</option>
+                 <option value=n>Knight</option>
+              </select>
+             </div>
+             
+             <br /><table width="248" border="1">
+                          <tbody>                              
+                               <tr id="promo_blancas">    <!--las piesa blancas de la corona -->
+                                 <td width="56" height="53" onClick="reina()"><img src="img/chesspieces/wikipedia/wQ.png" width="50" height="50" alt=""/></td>
+                                 <td width="53" onClick="torre()" ><img src="img/chesspieces/wikipedia/wR.png" width="50" height="50" alt=""/></td>
+                                 <td width="58" onClick="alfil()" ><img src="img/chesspieces/wikipedia/wB.png" width="50" height="50" alt=""/></td>
+                                 <td width="53" onClick="caballo()" ><img src="img/chesspieces/wikipedia/wN.png" width="50" height="50" alt=""/></td>
+                               </tr>
+                             
+                              <tr id="promo_negras" ><!--las imagenes negras de la corona  -->
+                                <td width="56" height="53" onClick="reina()"><img src="img/chesspieces/wikipedia/bQ.png" width="50" height="50" alt=""/></td>
+                                 <td width="53" onClick="torre()" ><img src="img/chesspieces/wikipedia/bR.png" width="50" height="50" alt=""/></td>
+                                 <td width="58" onClick="alfil()" ><img src="img/chesspieces/wikipedia/bB.png" width="50" height="50" alt=""/></td>
+                                 <td width="53" onClick="caballo()" ><img src="img/chesspieces/wikipedia/bN.png" width="50" height="50" alt=""/></td>
+                             </tr>
+                                <tr>
+                                  <td>Queen</td>
+                                  <td>Rook</td>
+                                  <td>Bishop</td>
+                                  <td>Knight</td>
+                                </tr>
+                         </tbody>
+                 </table><br /> 
+            </div> 
+</div>
+
+</body>
+</html>
