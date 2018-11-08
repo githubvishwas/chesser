@@ -163,9 +163,15 @@ var sendmove = function() {
 function record() {
 	//console.log("Board pos: " + board.fen());
 	recordstart = 1
-	if(startPos === "") {
-		startPos = board.fen() + " " + "w" + " KQkq - 0 1";
+	var toplay = "w"
+	if (document.getElementById('b').checked) {
+		toplay = document.getElementById('b').value;
 	} 
+	if(startPos === "") {
+		startPos = board.fen() + " " + toplay + " KQkq - 0 1";
+	} else {
+		startPos = startPos.split(" ")[0] + " " + toplay + " KQkq - 0 1";
+	}
 	console.log("Board pos: " + startPos);
 	game = new Chess();
 	game.load(startPos);
