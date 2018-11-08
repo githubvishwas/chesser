@@ -303,6 +303,9 @@ function kw3(){   //solo muestra la popu
 	game.undo();
 	kw3();		
 }
+function help() {
+	alert("Instructions:\n1. Drag the required pieces to the required position on the board\n2. Ensure that you have selected the white or black to play radio option correctly\n3. Click on the first button from left to record the solution and then play the correct moves on the board\n4. In case of any mistakes, click on the second button from left to undo that particular move\n5. If you want to go back to initial position which you had set, click on record button again\n6. Just reload the page to start afresh\n7. Once you have played the moves, click on the third button from left to get a link which you can forward to anyone and share the puzzle with them\n8. In case of confusion click on the button with a question mark..oh you are already here :)\n Enjoy and do send your feedback to vishwas.ib@gmail.com!!")
+}
 function playSolution() {
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
@@ -371,9 +374,15 @@ function main() {
 		x.style.display = "none"
 		x = document.getElementById("toplay");
 		x.style.display = "none"
+		x = document.getElementById("solbtn");
+		x.style.display = "none"
 		solveMode = 1;
 	} else {
-		var x = document.getElementById("userbtns2");
+		var x = document.getElementById("userbtns1");
+		x.style.display = "none"
+		x = document.getElementById("userbtns2");
+		x.style.display = "none"
+		x = document.getElementById("userbtns3");
 		x.style.display = "none"
 	}
 	

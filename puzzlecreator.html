@@ -49,11 +49,25 @@
     <div id="board" style="width: 300px"></div>
 
 	<p>Powered by chess.js & chessboard.js<span id="status" style="width: 250px"></span></p>
-	
 	<div id="toplay">
 		  <input type="radio" id="w" name="To play" value="w" checked> white to play
 		  <input type="radio" id="b" name="To play" value="b"> black to play
 	</div>
+	<div id ="solbtn" style="margin: 5px; width: 400px;display: inline-block;">
+		<a href="#" class="btn btn-info btn-lg" id="record" onclick = "record()">
+          <span class="glyphicon glyphicon-record"></span>
+        </a>
+		<a href="#" class="btn btn-info btn-lg" id="undo" onclick = "undo()">
+          <span class="glyphicon glyphicon-repeat"></span>
+        </a>
+		<a href="#" class="btn btn-info btn-lg" id="share" onclick = "SharePuzzle()">
+          <span class="glyphicon glyphicon-share"></span>
+        </a>
+		<a href="#" class="btn btn-info btn-lg" id="help" onclick = "help()">
+          <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+	</div>
+	
 	<div id="userbtns1">
 		<button type = "button"  style="width: 125px; margin:5px; display: inline-block;" class="btn btn-lg btn-warning" onclick = "record()">Record</button>
 	
@@ -66,7 +80,7 @@
 		<br/>
 	</div>
 	
-	<div id="userbtns2">
+	<div id="userbtns3">
 		<button type = "button"  style="width: 265px; margin:5px; display: inline-block;" class="btn btn-lg btn-success" onclick = "SharePuzzle()">Share Puzzle</button>
 	</div>
 
