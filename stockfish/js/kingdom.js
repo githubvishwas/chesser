@@ -20,7 +20,7 @@
     var clock_manager;
     var pieces_moved;
     var startpos;
-    var debugging = false;
+    var debugging = true;
     var legal_move_engine;
     var cur_pos_cmd;
     var game_history;
