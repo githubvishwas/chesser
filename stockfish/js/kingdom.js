@@ -178,7 +178,7 @@
             }
             
             if (debugging) {
-                console.log(cmd);
+                console.log("1" + cmd);
             }
             
             /// Only add a que for commands that always print.
@@ -2064,7 +2064,7 @@
         G.events.attach("eval", function oneval(e)
         {
             if (debugging) {
-                console.log(e)
+                console.log("2" + e)
             }
             
             /// Is this eval for the current position?
