@@ -632,6 +632,6 @@ var layout = {};
 var evaler;
 var debugging = true;
 var move_score = 0.0;
-var move_score_array = ""
+var move_score_array = []
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 main()
