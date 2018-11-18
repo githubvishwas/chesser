@@ -570,8 +570,8 @@ function AnalyzePGN()
 	evaler.send("ucinewgame");
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
-		
-		evaler.send("position fen r1k4r/p2nb1p1/2b4p/1p1n1p2/2PP4/3Q1NB1/1P3PPP/R5K1 b - c3 0 19");
+		console.log("Evaluating fen " + game.fen())
+		evaler.send("position fen " + game.fen());
 		//evaler.send("go movetime 1000");
 		evaler.send("go movetime 1000", function ongo(str)
 		{
@@ -583,7 +583,7 @@ function AnalyzePGN()
 			//G.events.trigger("evaled", {ply: ply});
 		}, function stream(str)
 		{
-			console.log("str: ", str)
+			//console.log("str: ", str)
 			var matches = str.match(/depth (\d+) .*score (cp|mate) ([-\d]+) .*pv (.+)/),
 				score,
 				type,
@@ -596,10 +596,10 @@ function AnalyzePGN()
 					score = Number(matches[3]);
 					pv = matches[4].split(" ");
 					move_score = score;
-					console.log("Depth: ", depth)	
-					console.log("type: ", type)	
-					console.log("score: ", score)	
-					console.log("pv: ", pv)	
+					//console.log("Depth: ", depth)	
+					//console.log("type: ", type)	
+					//console.log("score: ", score)	
+					//console.log("pv: ", pv)	
 			} else {
 				statusEl.html("Score: No matches");	
 			}			
