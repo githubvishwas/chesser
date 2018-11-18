@@ -512,7 +512,7 @@ function load_engine()
 		}
 		
 		if (debugging) {
-			console.log("1: " + cmd);
+			//console.log("1: " + cmd);
 		}
 		
 		/// Only add a que for commands that always print.
@@ -551,7 +551,15 @@ function load_engine()
 	
 	return engine;
 }
-
+function printOutPut() 
+{
+	
+	console.log("=====Calculation done!=====");
+	console.log("move_score_array: ",move_score_array);
+	console.log("solArray: ", solArray)
+	board.position(game.fen());
+    istep = solArray.length;
+}
 function AnalyzePGN()
 {
 	console.log("Init")	
@@ -576,11 +584,14 @@ function AnalyzePGN()
 		evaler.send("go movetime 1000", function ongo(str)
 		{
 			console.log("Calculating")
-			console.log("Move score: " + move_score)		
+			console.log("Move " + i + " score: " + move_score)		
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
 			move_score_array.push(move_score);
+			if(i + 1 == solArray.length) {
+				printOutPut();
+			}			
 			//G.events.trigger("evaled", {ply: ply});
 		}, function stream(str)
 		{
@@ -608,8 +619,7 @@ function AnalyzePGN()
 		});
     }
     
-    board.position(game.fen());
-    istep = solArray.length;
+    
 	
 	
 	
