@@ -1,6 +1,7 @@
 
 	var evaler;
 	var statusEl = $('#status1');
+	var debugging = true;
 	statusEl.html("Started...");	
 	console.log("Started...")
 	function error(str)
