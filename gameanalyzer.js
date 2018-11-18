@@ -205,15 +205,7 @@
 		{
 			console.log("Calculating")	
             var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
-            
-            if (game_history[ply] && !evaler.stop) {
-                if (matches) {
-                    game_history[ply].eval_best_move = matches[1];
-                    game_history[ply].eval_ponder = matches[2];
-                }
-                
-                game_history[ply].evaled = true;
-            }
+           
             evaler.busy = false;
             //G.events.trigger("evaled", {ply: ply});
         }, function stream(str)
@@ -230,7 +222,7 @@
                     type = matches[2];
                     score = Number(matches[3]);
                     pv = matches[4].split(" ");
-					statusEl.html("Score: " + str(score));
+					
 					console.log("Depth: ", depth)	
 					console.log("type: ", type)	
 					console.log("score: ", score)	
