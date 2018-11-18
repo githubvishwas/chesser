@@ -201,7 +201,7 @@
 		evaler.send("ucinewgame");
 		evaler.send("position fen r1k4r/p2nb1p1/2b4p/1p1n1p2/2PP4/3Q1NB1/1P3PPP/R5K1 b - c3 0 19");
 		//evaler.send("go movetime 5000");
-		evaler.send("go movetime 1000", function ongo(str)
+		evaler.send("go movetime 5000", function ongo(str)
 		{
 			console.log("Calculating")	
             var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
