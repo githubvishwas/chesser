@@ -575,7 +575,8 @@ function AnalyzePGN()
 		//evaler.send("go movetime 1000");
 		evaler.send("go movetime 1000", function ongo(str)
 		{
-			console.log("Calculating")	
+			console.log("Calculating")
+			console.log("Move score: " + move_score)		
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
