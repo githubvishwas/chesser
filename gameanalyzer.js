@@ -131,7 +131,7 @@
                 }
                 
                 /// Remove this from the que.
-                G.array_remove(que, que_num);
+                //G.array_remove(que, que_num);
             }
         };
         
@@ -215,7 +215,7 @@
                 game_history[ply].evaled = true;
             }
             evaler.busy = false;
-            G.events.trigger("evaled", {ply: ply});
+            //G.events.trigger("evaled", {ply: ply});
         }, function stream(str)
         {
 			console.log("str: ", str)
