@@ -631,10 +631,9 @@ function AnalyzePGN()
 	evaler.send("ucinewgame");
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
-		evaler.curr_ply = i;
-		console.log("Analyzing move: ", evaler.curr_ply)
-		AnalyzeCore();
-		sleep(1005)
+		//evaler.curr_ply = i;
+		//console.log("Analyzing move: ", evaler.curr_ply)
+		//AnalyzeCore();
     }
     
     
