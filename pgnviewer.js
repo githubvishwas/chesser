@@ -276,7 +276,7 @@ $('#nextBtn5').on('click', function() {
     }
 	 });
    // 7. just for test
-  $('#endPositionBtn5').on('click', function() {
+  $('#testbtn').on('click', function() {
 	console.log("move_score_array: ", move_score_array)
   });
   function handleFileSelect(evt) {
@@ -297,7 +297,7 @@ $('#nextBtn5').on('click', function() {
 			istep = solArray.length;
 			move_score_array = new Array(istep);
 			for(var j = 0; j< istep;j++) {
-				move_score_array[j] = 0.0
+				move_score_array[j] = 999
 			}
 			create_table();
 			AnalyzePGN();
