@@ -279,6 +279,16 @@ $('#nextBtn5').on('click', function() {
   $('#testbtn').on('click', function() {
 	console.log("move_score_array: ", move_score_array)
   });
+  function testanalysis() {
+	  solArray = ["e4","e5","d4","d5"];
+		istep = solArray.length;
+		move_score_array = new Array(istep);
+		for(var j = 0; j< istep;j++) {
+			move_score_array[j] = 999
+		}
+		create_table();
+		AnalyzePGN();
+  }
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
@@ -369,7 +379,7 @@ function main() {
 	
 	board = ChessBoard('board', cfg);
 	board.position(game.fen());
-
+	testanalysis();
 	updateStatus();
 }
 
@@ -638,10 +648,6 @@ function AnalyzePGN()
 		evaler.curr_ply = i;
 		console.log("Analyzing move: ", evaler.curr_ply)
 		AnalyzeCore();
-		evaler.busy = true;
-		while(evaler.busy) {
-			waitforcalc();
-		}
     }
     
     board.position(game.fen());
