@@ -584,7 +584,7 @@ function AnalyzeCore()
 		{
 			console.log("Calculating")
 			console.log("Move " + evaler.curr_ply + " score: " + move_score)	
-			//move_score_array[evaler.curr_ply] = move_score	
+			move_score_array[evaler.curr_ply] = move_score	
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
@@ -609,7 +609,7 @@ function AnalyzeCore()
 					score = Number(matches[3]);
 					pv = matches[4].split(" ");
 					move_score = score;
-					move_score_array[evaler.curr_ply] = move_score	
+					//move_score_array[evaler.curr_ply] = move_score	
 					//console.log("Depth: ", depth)	
 					//console.log("type: ", type)	
 					//console.log("score: ", score)	
