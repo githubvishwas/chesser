@@ -274,6 +274,7 @@ $('#nextBtn5').on('click', function() {
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
     }
+	 });
    // 7. just for test
   $('#endPositionBtn5').on('click', function() {
 	console.log("move_score_array: ", move_score_array)
