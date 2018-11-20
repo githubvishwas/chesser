@@ -274,9 +274,9 @@ $('#nextBtn5').on('click', function() {
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
     }
-    
-    board.position(game.fen());
-    istep = solArray.length;
+   // 7. just for test
+  $('#endPositionBtn5').on('click', function() {
+	console.log("move_score_array: ", move_score_array)
   });
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -294,6 +294,10 @@ $('#nextBtn5').on('click', function() {
 		
 			solArray = lsol.toString().split(',');
 			istep = solArray.length;
+			move_score_array = new Array(istep);
+			for(var j = 0; j< istep;j++) {
+				move_score_array[j] = 0.0
+			}
 			create_table();
 			AnalyzePGN();
 			console.log("move_score_array: ",move_score_array);
@@ -578,17 +582,18 @@ function AnalyzePGN()
 	evaler.send("ucinewgame");
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
-		console.log("Evaluating fen " + game.fen())
+		//console.log("Evaluating fen " + game.fen())
 		evaler.send("position fen " + game.fen());
 		//evaler.send("go movetime 1000");
-		evaler.send("go movetime 1000", function ongo(str)
+		evaler.send("go movetime 1000", function ongo(str,i)
 		{
 			console.log("Calculating")
-			console.log("Move " + i + " score: " + move_score)		
+			console.log("Move " + i + " score: " + move_score)	
+			move_score_array[i] = move_score	
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
-			move_score_array.push(move_score);
+			//move_score_array.push(move_score);
 			if(i + 1 == solArray.length) {
 				printOutPut();
 			}			
