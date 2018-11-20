@@ -582,7 +582,8 @@ function AnalyzeCore()
 			//move_score_array.push(move_score);
 			if(evaler.curr_ply + 1 == solArray.length) {
 				printOutPut();
-			}			
+			}
+			evaler.send("stop");	
 			//G.events.trigger("evaled", {ply: ply});
 		}, function stream(str)
 		{
