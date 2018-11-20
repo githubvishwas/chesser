@@ -584,7 +584,7 @@ function AnalyzeCore()
 		{
 			console.log("Calculating")
 			console.log("Move " + evaler.curr_ply + " score: " + move_score)	
-			move_score_array[evaler.curr_ply] = move_score	
+			//move_score_array[evaler.curr_ply] = move_score	
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
