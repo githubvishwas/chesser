@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            .loading-bar-container {
+                width: 200px;
+                height: 25px;
+                border: 1px solid lightgrey;
+            }
+            .loading-bar-value {
+                background-color: green;
+                height: 100%;
+                width: 0%;
+            }
+            button {
+                margin-top: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loading-bar-container">
+            <div class="loading-bar-value" />
+        </div>
+        <div id="factors"></div>
+        <button>Click me, I still work!</button>
+        <script src="main.js"></script>
+        <script>
+            window.loadingIndicator.init();
+        </script>
+    </body>
+</html>
