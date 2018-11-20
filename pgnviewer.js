@@ -613,6 +613,9 @@ function sleep(delay) {
         var start = new Date().getTime();
         while (new Date().getTime() < start + delay);
       }
+function waitforcalc() {
+        return 0;
+      }	  
 function AnalyzePGN()
 {
 	console.log("Init Analyze")	
@@ -631,12 +634,16 @@ function AnalyzePGN()
 	evaler.send("ucinewgame");
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
-		//evaler.curr_ply = i;
-		//console.log("Analyzing move: ", evaler.curr_ply)
-		//AnalyzeCore();
+		evaler.curr_ply = i;
+		console.log("Analyzing move: ", evaler.curr_ply)
+		AnalyzeCore();
+		evaler.busy = true;
+		while(evaler.busy) {
+			waitforcalc();
+		}
     }
     
-    
+    board.position(game.fen());
 	
 	
 	
