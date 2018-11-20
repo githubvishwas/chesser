@@ -590,7 +590,7 @@ function AnalyzePGN()
 		evaler.send("go movetime 1000", function ongo(str)
 		{
 			console.log("Calculating")
-			console.log("Move " + i + " score: " + move_score)	
+			console.log("Move " + evaler.curr_ply + " score: " + move_score)	
 			move_score_array[i] = move_score	
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
