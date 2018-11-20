@@ -609,6 +609,10 @@ function AnalyzeCore()
 			
 		});
 }
+function sleep(delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay);
+      }
 function AnalyzePGN()
 {
 	console.log("Init Analyze")	
@@ -629,7 +633,8 @@ function AnalyzePGN()
         game.move(solArray[i]);
 		evaler.curr_ply = i;
 		console.log("Analyzing move: ", evaler.curr_ply)
-		setTimeout(AnalyzeCore, 1000);
+		AnalyzeCore();
+		sleep(1005)
     }
     
     
