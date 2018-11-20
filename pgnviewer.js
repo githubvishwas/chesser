@@ -628,6 +628,7 @@ function AnalyzePGN()
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
 		evaler.curr_ply = i;
+		console.log("Analyzing move: ", evaler.curr_ply)
 		setTimeout(AnalyzeCore, 1000);
     }
     
