@@ -286,7 +286,6 @@ $('#nextBtn5').on('click', function() {
 		for(var j = 0; j< istep;j++) {
 			move_score_array[j] = 999
 		}
-		create_table();
 		AnalyzePGN();
   }
   function handleFileSelect(evt) {
@@ -610,6 +609,7 @@ function AnalyzeCore()
 					score = Number(matches[3]);
 					pv = matches[4].split(" ");
 					move_score = score;
+					move_score_array[evaler.curr_ply] = move_score	
 					//console.log("Depth: ", depth)	
 					//console.log("type: ", type)	
 					//console.log("score: ", score)	
