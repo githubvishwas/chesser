@@ -570,17 +570,17 @@ function AnalyzeCore()
 	//console.log("Evaluating fen " + game.fen())
 		evaler.send("position fen " + game.fen());
 		//evaler.send("go movetime 1000");
-		evaler.curr_ply = i;
+		
 		evaler.send("go movetime 1000", function ongo(str)
 		{
 			console.log("Calculating")
 			console.log("Move " + evaler.curr_ply + " score: " + move_score)	
-			move_score_array[i] = move_score	
+			move_score_array[evaler.curr_ply] = move_score	
 			var matches = str.match(/^bestmove\s(\S+)(?:\sponder\s(\S+))?/);
 			
 			evaler.busy = false;
 			//move_score_array.push(move_score);
-			if(i + 1 == solArray.length) {
+			if(evaler.curr_ply + 1 == solArray.length) {
 				printOutPut();
 			}			
 			//G.events.trigger("evaled", {ply: ply});
@@ -627,6 +627,7 @@ function AnalyzePGN()
 	evaler.send("ucinewgame");
 	for(var i = istep; i < solArray.length; i++) {
         game.move(solArray[i]);
+		evaler.curr_ply = i;
 		setTimeout(AnalyzeCore, 1000);
     }
     
