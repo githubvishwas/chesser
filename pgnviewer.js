@@ -565,25 +565,9 @@ function printOutPut()
 	board.position(game.fen());
     istep = solArray.length;
 }
-function AnalyzePGN()
+function AnalyzeCore()
 {
-	console.log("Init Analyze")	
-	if (typeof Worker === "undefined") {
-		return alert("Sorry, analyzer does not support this browser.");
-	}
-	
-	for(var i = istep; i > 0; i--) {
-        game.undo();
-    }
-	
-    board.position(game.fen());
-    istep = 0;
-	evaler = load_engine();
-	evaler.send("uci");
-	evaler.send("ucinewgame");
-	for(var i = istep; i < solArray.length; i++) {
-        game.move(solArray[i]);
-		//console.log("Evaluating fen " + game.fen())
+	//console.log("Evaluating fen " + game.fen())
 		evaler.send("position fen " + game.fen());
 		//evaler.send("go movetime 1000");
 		evaler.curr_ply = i;
@@ -624,6 +608,26 @@ function AnalyzePGN()
 			}			
 			
 		});
+}
+function AnalyzePGN()
+{
+	console.log("Init Analyze")	
+	if (typeof Worker === "undefined") {
+		return alert("Sorry, analyzer does not support this browser.");
+	}
+	
+	for(var i = istep; i > 0; i--) {
+        game.undo();
+    }
+	
+    board.position(game.fen());
+    istep = 0;
+	evaler = load_engine();
+	evaler.send("uci");
+	evaler.send("ucinewgame");
+	for(var i = istep; i < solArray.length; i++) {
+        game.move(solArray[i]);
+		setTimeout(AnalyzeCore, 1000);
     }
     
     
