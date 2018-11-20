@@ -566,7 +566,7 @@ function printOutPut()
 }
 function AnalyzePGN()
 {
-	console.log("Init")	
+	console.log("Init Analyze")	
 	if (typeof Worker === "undefined") {
 		return alert("Sorry, analyzer does not support this browser.");
 	}
