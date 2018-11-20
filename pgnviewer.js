@@ -640,10 +640,11 @@ function AnalyzePGN()
 	
     board.position(game.fen());
     istep = 0;
-	evaler = load_engine();
-	evaler.send("uci");
-	evaler.send("ucinewgame");
+	
 	for(var i = istep; i < solArray.length; i++) {
+		evaler = load_engine();
+		evaler.send("uci");
+		evaler.send("ucinewgame");
         game.move(solArray[i]);
 		evaler.curr_ply = i;
 		console.log("Analyzing move: ", evaler.curr_ply)
