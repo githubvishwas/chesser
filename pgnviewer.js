@@ -586,7 +586,8 @@ function AnalyzePGN()
 		//console.log("Evaluating fen " + game.fen())
 		evaler.send("position fen " + game.fen());
 		//evaler.send("go movetime 1000");
-		evaler.send("go movetime 1000", function ongo(str,i)
+		evaler.curr_ply = i;
+		evaler.send("go movetime 1000", function ongo(str)
 		{
 			console.log("Calculating")
 			console.log("Move " + i + " score: " + move_score)	
